@@ -1,0 +1,46 @@
+@model User
+
+<div class="text-right">
+    <p><a class="btn mt-2 float-end" href="/">Log Out</a></p>
+</div>
+<div class="text-center">
+    <h1>Welcome to the Wedding Planner</h1>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Wedding</th>
+                <th scope="col">Date</th>
+                <th scope="col">Guest</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Wedding l in ViewBag.AllWeddings)
+            {
+                <tr>
+                    <th scope="row"><a href="/view/@l.WeddingId">@l.Wedder_One & @l.Wedder_Two</a></th>
+                    <td>@l.Date.ToShortDateString()</td>
+                    <td>@l.Users_Already_RSVP.Count</td>
+                    <td>
+                        @if (l.UserId == ViewBag.Login_User.UserId)
+                        {
+                            <a href="/delete/@l.WeddingId">Delete</a>
+                        }
+                        else if (l.Users_Already_RSVP.Any(m => m.UserId == ViewBag.Login_User.UserId))
+                        {
+                            <a href="/unrsvp/@l.WeddingId">Un-RSVP</a>
+                        }
+                        else
+                        {
+                            <a href="/rsvp/@l.WeddingId">RSVP</a>
+                        }
+                    </td>
+                </tr>
+            }
+    </table>
+</div>
+<div class="text-right">
+    <p><a class="btn mt-2 float-end" href="/add/wedding">New Wedding</a></p>
+</div>

@@ -1,0 +1,24 @@
+@using Wedding_Planner.Models
+@model Guest
+
+<div class="text-right">
+    <p><a class="btn mt-2 float-end" href="/Dashboard">Dashboard</a></p>
+    <p><a class="btn mt-2 float-end" href="/">Log Out</a></p>
+</div>
+<div class="text-center">
+    <div class="row">
+        <div class="col-12">
+            <h1>@ViewBag.AllWeddings.Wedder_One and @ViewBag.AllWeddings.Wedder_Two's Wedding</h1>
+            <h3>Date: @ViewBag.AllWeddings.Date.ToString("MMMM dd, yyyy")</h3>
+            <ul>Guest
+                @foreach (Guest l in @ViewBag.Guests)
+                {
+                <li>@l.User.First_Name @l.User.Last_Name</li>
+                }
+            </ul>
+        </div>
+        <div class="col-12">
+            <h1>Image Goes HERE</h1>
+        </div>
+    </div>
+</div>
